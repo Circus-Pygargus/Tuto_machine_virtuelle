@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tuto machine virtuelle</title>
+    <link rel="stylesheet" href="css/style_pour_scss.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Virtual Machine</h1>
+        <!-- navbabar LOL -->
+        <nav id="navbabar">
+            <ul>
+                <li><a href="#install_vm"><div class="myNavDiv">Install VM</div></a></li>
+                <li><a href="#add_os"><div class="myNavDiv">Ajout OS</div></a></li>
+                <li><a href="#new_projet"><div class="myNavDiv">Nouveau projet</div></a></li>
+                <li><a href="#recap"><div class="myNavDiv">Commandes journalières</div></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+    <!-- Installation -->
+    <section>
+        <h2 id="install_vm">Installation VM</h2>
+        <p>
+            Nous allons utiliser Virtual Box.<br>
+            Charger et installer le package pour windows host chez <a target="_blank" href="https://www.virtualbox.org">virtualbox.org</a>.<br>
+            Accepter tout ce que l'installation demande (sauf programmes tiers, si présents bien sûr).<br>
+            Pas besoin d'ouvrir Virtual Box une fois installé, donc fermer si ouvert.<br>
+        </p>
+        <!-- <p>
+            Installer Ruby car Vagrant en aura besoin pour la VM   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        </p> -->
+        <p>
+            Aller chez <a target="_blank" href="https://www.vagrantup.com/">vagrantup.com</a>.<br>
+            Charger et installer pour windows.<br>
+            Redémarrer la machine lorsque demandé.<br>
+            Attention : Si pas de demande de redémarrage, il y a certainement un soucis. Désinstaller et réinstaller.<br>
+        </p>
+        <p>Nous avons maintenant les outils nécessaires.</p>
+    </section>
+
+
+    <!-- Ajouter un OS -->
+    <section>
+        <h2 id="add_os">Ajouter un OS</h2>
+        <p>
+            Nous allons ici choisir et installer un système d'exploitation,<br>
+            mais nous allons avoir besoin d'un dossier pour travailler.<br>
+            Créer un dossier dans lequel on mettra chacun de nos projets réalisés en VM.<br>
+            Y créer un sous-dossier (un projet de tests ou un vrai projet).<br>
+            Chez moi, ça donne ça, car je crée ce tuto en même temps que l'install :<br> 
+            <code class="code">G:\Creations\virtual_machine\tutos\virtual_machine</code>
+        </p>
+        <p>
+            Dans Visual Studio Code, ouvrir le dernier dossier créé.
+        </p>
+        <p id="siOubliNomOS">
+            Aller chez <a target="_blank" href="https://app.vagrantup.com/boxes/search">app.vagrantup.com</a><br>
+            (recherche google : vagrant boxes)<br>
+            Sélectionner virtualbox dans provider et faire une recherche de l'OS <br>
+            que l'on souhaite installer dans notre virtualbox.
+        </p>
+        <img class="myImg" src="img/choix_os.jpg" alt="site du choix de l'OS" width="718" height="809">
+        <p>choisir une version blank (version identique à l'officielle) nous assure <br>
+            de ne pas avoir de modifs effectuées par l'uplooader du fichier.<br>
+            Ici nous utiliserons Ubuntu Bionic 64.<br>
+            Ne pas télécharger, juste cliquer sur celle que l'on veut.<br>
+            copier ce qui est entre les guillemets de la ligne <code class="code">config.vm.box =</code> <br>
+            ici : ubuntu/bionic64<br>
+            <span class="bold">N.B. : </span>il n'y a pas de guillemets ;)
+        </p>
+        <img class="myImg" src="img/box_add.jpg" alt="code" width="550" height="525">
+        <p>Petit apparté : dans l'onglet new, on trouve aussi <br>
+            des infos sur le code à taper pour initialiser et <br>
+            lancer la machine virtuelle dans un nouveau projet :
+        </p>
+        <img class="myImg" src="img/vagrant_onglet_new.jpg" alt="code" width="607" height="421">
+        <p>
+            Retourner dans visual studio code et ouvrir un terminal,<br>
+            ça devrait afficher quelque chose comme : 
+        </p>
+        <img class="myImg" src="img/chemin_terminal.jpg" alt="code" width="481" height="112">
+        <p>
+            Si ce n'est pas le cas, appuyer sur entrée.<br>
+            Taper : <code class="code">vagrant -v</code> pour vérifier que vagrant est bien installé,<br>
+            il doit afficher la version installée.<br>
+            Nous allons maintenant associer l'OS choisi à notre machine virtuelle.<br>
+            Taper : <code class="code">vagrant box add et_coller_ce_que_vous_avez_copié_chez_Vagrant_lors_du_choix_de_l_OS</code><br>
+        </p>
+        <img class="myImg" src="img/box_add_code.jpg" alt="code" width="665" height="134">
+        <img class="myImg" src="img/box_add_code_ok.jpg" alt="code" width="856" height="233">
+        <p>
+            <span class="bold">N.B. :</span>  L'ajout d'OS est à refaire pour tester ou utiliser d'autres OS<br>
+            ou pour mettre à jour celui que l'on utilise, mais il n'est <br>
+            pas nécessaire de réinstaller un nouvel OS à chaque projet.<br>
+        </p>
+    </section>
+
+
+    <!-- Nouveau projet -->
+    <section>
+        <h2 id="new_projet">Nouveau projet</h2>
+        <p>Dans Visual studio code, dans le dossier du nouveau projet, ouvrir un terminal :</p>
+        <img class="myImg" src="img/chemin_terminal.jpg" alt="code" width="481" height="112">
+        <p>Taper <code class="code">vagrant init</code></p>
+        <img class="myImg" src="img/vagrant_init.jpg" alt="code" width="524" height="104">
+        <p>Cela a créé un fichier Vagrantfile dans le dossier du projet.<br>
+            Ouvrir ce fichier dans Visual studio code.<br>
+            Remplir la ligne <code class="code">config.vm.box</code> comme trouvé chez Vagrant.<br>
+            Pour notre exemple, ça donne ça :
+        </p>
+        <img class="myImg" src="img/vagrantfile_config_vm_box.jpg" alt="code" width="332" height="24">
+        <p>si oubli du nom de l'OS à renseigner : <a href="#siOubliNomOS">c'est là</a></p>
+        <p>
+            Décommenter la ligne (en retirant le # en début de ligne) : <br>
+            <code class="code">config.vm.network "forwarded_port", guest: 80, host: 8080</code>
+        </p>
+        <img class="myImg" src="img/vagrantfile_config_network.jpg" alt="code" width="564" height="26">
+        <p>
+            Ici, on peut changer le port 8080 en 8081 ou suivants<br>
+            si l'on veut faire tourner plusieur VM en même temps.<br>
+            Attention, c'est gourmant en ressources (prévoir 16 Go de ram) !<br>
+            Décommenter également les 3 lignes :<br>
+            <code class="code">config.vm.provider "virtualbox" do |vb|</code><br>
+            <code class="code">vb.memory = "1024"</code><br>
+            <code class="code">end</code><br>
+            J'en ai profité pour n'attribuer que 512 Mo de mémoire,<br>
+            mais c'est la valeur par défaut ;) .
+        </p>
+        <img class="myImg" src="img/vagrantfile_config_provider.jpg" alt="code" width="562" height="138">
+        <p>Enregistrer le fichier Vagrantfile pour que les changements soient pris en compte.</p>
+        <p>
+            Dans le terminal de Visual studio code, taper :<br>
+            <code class="code">vagrant up</code><br>
+            Cela va démarrer la machine virtuelle.<br>
+            Autoriser l'accès dans le pare-feu windows si demandé.<br>
+            Le terminal devrait afficher quelque chose comme ça :<br>
+        </p>
+        <img class="myImg" src="img/vagrant_up.jpg" alt="code" width="628" height="89">
+        <p>
+            Dans Visual studio code,<br>
+            créer un sous-dossier app dans le dossier du projet,<br>
+            y créer un fichier index.html,<br>
+            insérer du texte dans ce fichier et enregistrer<br>
+            (un &lt;p&gt; ou un &lt;h1&gt; feront l'affaire, c'est juste pour tester).<br>
+        </p>
+        <p>Dans le terminal, taper :<br>
+            <code class="code">vagrant ssh</code><br>
+            cela va nous connecter à la VM,<br>
+            le terminal devrait afficher quelque chose du style :<br>
+        </p>
+        <img class="myImg" src="img/vagrant_ssh.jpg" alt="code" width="220" height="28">
+        <p>Nous sommes ici devenu l'utilisateur vagrant travaillant sur la machine ubuntu_bionic.</p>
+        <p>
+            Nous allons maintenant installer un serveur apache.<br>
+            Dans le terminal, taper :<br>
+            <code class="code">sudo apt-get install apache2</code><br>
+            répondre <code class="code">Y</code> lorsqu'il le demande.<br>
+            Une fois apache installé, taper :<br>
+            <code class="code">cd var/www/html</code><br>
+            Cela correspond au dossier (de stockage des pages web) utilisé par apache.<br>
+            Taper : <code class="code">ls</code> pour afficher le contenu du dossier.<br>
+            On devrait y trouver le fichier html par défaut d'apache.<br>
+        </p>
+        <img class="myImg" src="img/apache_index_html_defaut.jpg" alt="code" width="331" height="71">
+        <p>
+            Si l'on va dans notre navigateur web et que l'on colle <code class="code">localhost:8080</code><br>
+            dans la barre d'adresse, on devrait avoir une page comme celle-là :
+        </p>
+        <img class="myImg" src="img/apache_defaut_page.jpg" alt="code" width="842" height="719">
+        <p>
+            C'est parce que l'on a pas encore expliqué à la VM où se situe le dossier de notre projet.<br>
+            Dans le fichier Vagrantfile, on doit donner les chemins relatifs de notre projet et du dossier web d'apache.<br>
+            La ligne par défaut est : <code class="code"># config.vm.synced_folder "../data", "/vagrant_data"</code><br>
+            modifier les valeurs<br>
+            Pour nous ici, ça donne ça :
+        </p>
+        <img class="myImg" src="img/vagrantfile_synced_folder.jpg" alt="code" width="512" height="23">
+        <p>
+            Il faut redémarrer la VM pour que les changements soient pris en compte.<br>
+            Dans le terminal, <br>
+            pour sortir de la machine virtuelle, taper :<br>
+            <code class="code">exit</code><br>
+            pour la redémarrer, taper :<br>
+            <code class="code">vagrant reload</code>
+        </p>
+        <img class="myImg" src="img/vagrant_reload.jpg" alt="code" width="529" height="72">
+        <p>
+            On peut maintenant retourner dans notre navigateur web <br>
+            et vérifier que les dossiers sont maintenant bien associés.<br>
+            Chez moi, puisque j'écris ce tuto en même temps, ça donne ça :
+        </p>
+        <img class="myImg" src="img/vm_verif_assos_dossiers.jpg" alt="code" width="942" height="457">
+        <p>Nous pouvons donc dès à présent bosser sur notre code,<br>
+            et afficher le résultat dans notre navigateur.
+        </p>
+        <p>
+            <span class="bold">N.B. :</span> Faudra-t-il être ou ne pas être connecté à la VM pour faire nos <code class="code">sass --watch</code><br>
+            et autres <code class="code">git</code> <br>
+            Rappel : l'ensemble de notre projet devra être situé dans le sous dossier app du projet,<br>
+            ça permettra de ne pas être ennuyer avec les fichiers supplémentaires créés par la VM.
+        </p>
+
+        <!-- GitHub -->
+        <h3>GitHub</h3>
+        <p>
+            Nous allons avoir besoin de GitHub pour archiver facilement <br>
+            les différents étapes de nos créations.<br>
+            Ici, git est déjà inclu dans la version d'Ubuntu que nous avons choisie.<br>
+            Nous n'aurons donc pas à l'installer cette fois ci.<br>
+            Je complèterai cette partie dès que possible avec une autre VM et un autre OS.<br>
+        </p>
+        <p>
+            Avant de pouvoir faire nos push, il 
+        </p>
+
+        <!-- Sass -->   
+        <h3>Installer SASS</h3>
+        <p>
+            Le petit soucis ici, c'est que l'on ne peut pas installer sass seul,<br>
+            Nous allons donc installer node.js, qui nous permettra d'utiliser npm<br>
+            pour installer sass.<br>
+            En étant connecté à la VM,<br>
+            dans le terminal, taper : <code class="code">sudo apt update</code>
+        </p>            
+            <img class="myImg" src="img/apt_update.jpg" alt="code" width="615" height="190">
+        <p>
+            ajouter :<code class="code">sudo apt install nodejs</code> <br>
+            Répondez <code class="code">Y</code> lorsque demandé :
+        </p>
+        <img class="myImg" src="img/install_nodejs_cmd.jpg" alt="code" width="535" height="206">
+        <img class="myImg" src="img/install_nodejs_reponse.jpg" alt="code" width="673" height="242">
+        <p>
+            Ici pas d'erreurs, on va pouvoir continuer. Ajouter dans le terminal :<br>
+            <code class="code">sudo apt install npm</code>
+        </p> 
+        <img class="myImg" src="img/install_npm_cmd.jpg" alt="code" width="377" height="29">
+        <p>
+            Ici aussi il faudra accepter de continuer l'installation avec un <code class="code">Y</code><br>
+            L'install devrait se terminer sans erreurs :
+        </p>
+        <img class="myImg" src="img/install_npm_reponse.jpg" alt="code" width="652" height="210">
+        <p>Ne manque plus que sass : <code class="code">sudo npm install -g sass</code></p>
+        <img class="myImg" src="img/install_sass.cmd.jpg" alt="code" width="420" height="26">
+        <p>Ici, j'ai eu deux warnings concernant npm,
+            mais un <code class="code">sass --version</code> nous confirmera une installation réussie.
+        </p>
+        <img class="myImg" src="img/install_sass_reponse.jpg" alt="code" width="730" height="207">
+        <img class="myImg" src="img/sass_version.jpg" alt="code" width="408" height="54">
+        <img class="myImg" src="" alt="code">
+        <img class="myImg" src="" alt="code">
+        <img class="myImg" src="" alt="code">
+        <img class="myImg" src="" alt="code">
+        <img class="myImg" src="" alt="code">
+        <p>
+            <span class="bold">N.B. : </span>Les commandes d'install faites dans le terminal de la VM diffèreront <br>
+            selon l'OS choisi pour la VM ! Il faudra systématiquement rechercher la commande à effectuer<br>
+            pour installer les composants voulus.
+            D'ailleurs, le chemin vers le dossier web d'apache (avec Ubuntu : /var/www/html/) changera certainement <br>
+            d'un OS à l'autre.
+        </p>
+
+        <!-- arrêter la VM -->
+        <h3>Arrêter la VM</h3>
+        <p>
+            Avant d'éteindre l'ordi, <br>
+            ne pas oublier d'arrêter la VM :<br>
+            Si encore connectyé à la vm dans le terminal, taper <br>
+            <code class="code">exit</code><br>
+            puis <code class="code">vagrant halt</code>
+        </p>
+        <img class="myImg" src="img/vagrant_halt.jpg" alt="code" width="512" height="104">
+    </section>
+
+
+    <!-- utilisation journalière -->
+    <section>
+        <h2 id="recap">Récapitulatif des commandes pour utilisation journalière</h2>
+        <ul>
+            <li>
+                <code class="code">vagrant up</code> démarre la VM
+            </li>
+            <li>
+                <code class="code">vagrant ssh</code> nous connecte à la VM
+            </li>
+            <li>
+                <code class="code">exit</code> déconnecte de la VM
+            </li>
+            <li>
+                <code class="code">vagrant halt</code> arrête la VM
+            </li>
+        </ul>    
+    </section>
+
+
+    <!-- Modal pour afficher les images taille réelle -->
+    <div id="myModal" class="modal close">
+        <img class="modal-content close" id="img01">
+    </div>
+
+
+    <!-- Charge le js -->
+    <script src="js/modal.js"></script>
+    <script src="js/menu.js"></script>
+</body>
+</html>

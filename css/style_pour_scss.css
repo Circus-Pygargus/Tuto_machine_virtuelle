@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0; 
+  text-decoration: none; 
+  list-style-type: none; }
+
+body {
+  width: 100vw;
+  background-color: antiquewhite; 
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
+  body .bold {
+      font-weight: 700;
+  }
+  body header {
+    position: relative; 
+    width: 100vw; }
+    body header h1 {
+      text-align: center;
+      font-size: 70px;
+      padding: 100px 0; }
+    body header #navbabar {
+      /* position: absolute; */
+      position: fixed;
+      top: 150px;
+      left: 50px;
+      /* width: 150px; */
+      /* height: 250px; */
+      background-color: #252525;
+      transition: left 1s;
+      transition-timing-function: ease-out;}
+      body header #navbabar ul {
+        /* width: 100%;
+        height: 100%; */
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-evenly;
+        align-items: center; */
+     }
+        body header #navbabar ul li { 
+          /* display: flex;
+          justify-content: center;
+          align-items: center; */
+          text-align: center;
+          line-height: 15px;   }
+        body header #navbabar ul li a {  
+            width: 200px;
+            height: 100%;
+            /* border: 1px solid white; */
+          color: white; }
+        body header #navbabar ul li a:hover {
+          color: #888888; }
+          body header #navbabar ul li a .myNavDiv { 
+            width: 200px;
+            height: 50px; 
+            line-height: 50px;
+            padding: 0 20px;
+          } 
+        /* body header #navbabar ul li:last-child a {
+          /*  text-align: center; */
+        /*  max-width: 97px; } */
+  body section {
+    width: 1280px;
+    margin: auto; }
+    body section h2 {
+      padding: 95px 0 50px 125px; 
+      font-size: 45px;}
+    body section h2 #recap {
+      font-size: 33px; }
+    body section p {
+      padding-left: 180px;
+      line-height: 18px; }
+      body section p a {
+        color: #e38d1c; }
+    body section img {
+      width: 200px;
+      height: 75px; 
+      padding: 15px;
+      display: block;
+      overflow: hidden;
+      margin: auto; }
+    body section img:hover {
+      opacity: 0.6;
+    } 
+    /* section récapitulatif */ 
+    body section ul {
+      padding-left: 180px;} 
+      body section ul li {
+        font-size: 18px;
+        line-height: 18px; 
+        margin: 25px;}
+      /* body section ul li code {
+        margin: 10px; } */
+    body .code {
+      padding: 3px 5px;      
+      background-color: grey;
+      color: antiquewhite; }
+    /* modal background */
+    body .modal {
+      display: none;
+      position: fixed;
+      z-index: 2;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.9); }
+
+    /* Modal contenu (image) */
+    body .modal-content {
+      display: block;
+      width: auto;
+      max-width: 1280px;
+      /* on ajoute une animation */
+      animation-name: zoomIn;
+      animation-duration: 0.6s; }
+
+    /* l'animation à l'arrivée du modal */
+    @keyframes zoomIn {
+        from {
+          transform: scale(0.1);
+        }
+        to {
+          transform: scale(1);
+        }
+    }
+    /* l'animation au départ du modal */
+    @keyframes zoomout {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(0.1);
+        }
+    }
+
+/*# sourceMappingURL=style.css.map */
