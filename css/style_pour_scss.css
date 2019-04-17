@@ -66,9 +66,14 @@ body {
       font-size: 45px;}
     body section h2 #recap {
       font-size: 33px; }
+    body section h3 {
+      font-size: 28px;
+      padding: 75px 0 35px 140px; }
     body section p {
       padding-left: 180px;
-      line-height: 18px; }
+      font-size: 18px;
+      line-height: 22px;
+      letter-spacing: 1.5 }
       body section p a {
         color: #e38d1c; }
     body section img {

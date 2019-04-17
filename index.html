@@ -201,10 +201,10 @@
             et afficher le résultat dans notre navigateur.
         </p>
         <p>
-            <span class="bold">N.B. :</span> Faudra-t-il être ou ne pas être connecté à la VM pour faire nos <code class="code">sass --watch</code><br>
+            <span class="bold">N.B. :</span> il faudra être connecté à la VM pour faire nos <code class="code">sass --watch</code><br>
             et autres <code class="code">git</code> <br>
             Rappel : l'ensemble de notre projet devra être situé dans le sous dossier app du projet,<br>
-            ça permettra de ne pas être ennuyer avec les fichiers supplémentaires créés par la VM.
+            ça permettra de ne pas être ennuyé avec les fichiers supplémentaires créés par la VM.
         </p>
 
         <!-- GitHub -->
@@ -217,8 +217,68 @@
             Je complèterai cette partie dès que possible avec une autre VM et un autre OS.<br>
         </p>
         <p>
-            Avant de pouvoir faire nos push, il 
+            Avant de pouvoir faire nos push, il va falloir fournir quelques renseignements à la machine. <br>
+            On va commencer par lui dire qui nous sommes avec ces deux lignes de code: <br>
+            <code class="code">git config --global user.name "ton_peudo_sur_GitHub"</code> <br>
+            <code class="code">git config --global user.email "l_adresse_email_donnée_chez_GitHub_lors_de_la_création_de_compte</code>
         </p>
+        <img class="myImg" src="img/git_config_global.jpg" alt="code" width="520" height="53">
+        <p>
+            Ensuite aller chez <a href="https://github.com/">github.com</a> et créez un nouveau dépot : <br>
+            une fois loggué, cliquer sur l'icone de votre avatar en haut à droite de la page, <br>
+            choisir "Your repositories" et cliquer sur bouiton vert "new".
+        </p>
+        <img class="myImg" src="img/git_new_repo.jpg" alt="code" width="1454" height="518">
+        <p>
+            Renseigner le champ "Repository name", choisir ou non d'autres fonctionnalités <br>
+            et cliquer sur le bouton "Create repository". <br>
+            Copier la 1ère ligne de code de la partie "…or push an existing repository from the command line"
+        </p>
+        <img class="myImg" src="img/git_recup_remote_cmd.jpg" alt="code" width="1001" height="724">
+        <p>
+            Retourner dans le terminal de la vm, <br>
+            se posittionner dans le dossier web d'apache avec <code class="code">cd /var/www/html/</code>. <br>
+            Initier le projet avec un <code class="code">git int</code> <br>
+            un dossier .git vient d'être créé (un point au début du nom d'un dossier signifie que ce dossier est caché sous linux). <br>
+            coller la commande copiée juste avant sur GitHub, <br>
+            pas de réponse d'Ubuntu si tout va bien, ça devrait donner quelque chose comme ça :</p>
+        <img class="myImg" src="img/git_remote_add.jpg" alt="code" width="876" height="71">
+        <p>
+            Nous allons bientôt faire notre premier push : <br>
+            Pour connaître quels fichiers sont suivis pour le commit, taper : <code class="code">git status</code> <br>
+            Si vous n'avez rien créé de plus que le fichier index.html <br>
+            vous devriez voir index.html écrit en rouge, c'est normal, il n'est pas encore suivi par git, <br>
+            perso, j'ai déjà quelques fichiers avec ce tuto :
+        </p>
+        <img class="myImg" src="img/git_status_rouge.jpg" alt="code" width="566" height="204">
+        <p>
+            Maintenant 2 solutions, soit on ajoute un à un les fichiers que l'on veut ajouter au commit, <br>
+            avec un <code class="code">git add le_nom_du_fichier</code> <br>
+            soit on ajoute d'un coup tous les fichiers non suivis avec un : <code class="code">git add *</code> <br>
+            Refaire un : <code class="code">git status</code> <br>
+            les noms des fichiers suivis vont apparaître en vert. <br>
+            Sur cette image, un fichier est rouge car je l'ai ajouté au projet entre le "git push" et le "git status" qui a suivi. 
+        </p>
+        <img class="myImg" src="img/git_add.jpg" alt="code" width="554" height="198">
+        <p>
+            Nous allons faire un commit (un peu comme une photographie de nos fichiers), <br>
+            qui nous permettra de revenir plus tard à cette version de notre code, taper : <br>
+            <code class="code">git commit -m "le_nom_du_commit"</code> <br>
+            ici le -m signifie que l'on attribue un message à notre commit <br>
+            ce message s'écrit juste après le -m et entre guillemets.
+        </p>
+        <img class="myImg" src="img/git_commit_cmd.jpg" alt="code" width="539" height="29">
+        <img class="myImg" src="img/git_commit_reponse.jpg" alt="code" width="441" height="174">
+        <p>
+            Il ne reste plus qu'à envoyer notre commit (ou nos commits, car on peut en faire plusieurs avant de push) <br>
+            taper : <code class="code">git push origin master</code> <br>
+            git va ici nous demander de renseigner nos pseudo et mot de passe GitHub. <br>
+            <span class="bold">N.B. : </span>sous linux, le mot de passe entré via un terminal ne s'affiche pas ! <br>
+            cela est vrai qu'il soit tapé ou copié-collé. <br>
+            Si pas d'erreurs, alors on peut maintenant voir nos fichiers sur github.com
+        </p>
+        <img class="myImg" src="img/git_push.jpg" alt="code" width="483" height="206">
+
 
         <!-- Sass -->   
         <h3>Installer SASS</h3>
@@ -230,7 +290,7 @@
             dans le terminal, taper : <code class="code">sudo apt update</code>
         </p>            
             <img class="myImg" src="img/apt_update.jpg" alt="code" width="615" height="190">
-        <p>
+        <p> Il faudra donc faire Entrée 
             ajouter :<code class="code">sudo apt install nodejs</code> <br>
             Répondez <code class="code">Y</code> lorsque demandé :
         </p>
@@ -253,15 +313,30 @@
         </p>
         <img class="myImg" src="img/install_sass_reponse.jpg" alt="code" width="730" height="207">
         <img class="myImg" src="img/sass_version.jpg" alt="code" width="408" height="54">
-        <img class="myImg" src="" alt="code">
-        <img class="myImg" src="" alt="code">
-        <img class="myImg" src="" alt="code">
-        <img class="myImg" src="" alt="code">
-        <img class="myImg" src="" alt="code">
+        <p>
+            Nous allons pouvoir compiler notre scss en css, <br>
+            pour cela il va falloir aller se positionner dans le bon dossier dans la VM, <br>
+            ou attribuer les chemins relatifs (par rapport à la position actuelle) <br>
+            des fichiers scss et css dans la commande watch. <br>
+            Ici, je me place dans le dossier css (contenant mes fichiers css), <br>
+            alors que les fichiers scss se situent dans leur propre dossier : <br>
+            (ici, le --poll permet de faire bien fonctionner le --watch lorsque sur une machine virtuelle) <br>
+            <code class="code">sass --watch --poll ../scss/style.scss:style.css</code>
+        </p>
+        <img class="myImg" src="img/sass_watch.jpg" alt="code" width="716" height="142">
+        <p>
+            Maintenant, et tant que je ne fais pas un CTRL + C, <br>
+            sass surveille mes sauvegardes du fichier style.scss et compile en css automatiquement à chaque fois :
+        </p>
+        <img class="myImg" src="img/sass_watch_live.jpg" alt="code" width="674" height="188">
+        
+
+
+         <!-- apparté -->
         <p>
             <span class="bold">N.B. : </span>Les commandes d'install faites dans le terminal de la VM diffèreront <br>
             selon l'OS choisi pour la VM ! Il faudra systématiquement rechercher la commande à effectuer<br>
-            pour installer les composants voulus.
+            pour installer les composants voulus. <br>
             D'ailleurs, le chemin vers le dossier web d'apache (avec Ubuntu : /var/www/html/) changera certainement <br>
             d'un OS à l'autre.
         </p>
@@ -271,7 +346,7 @@
         <p>
             Avant d'éteindre l'ordi, <br>
             ne pas oublier d'arrêter la VM :<br>
-            Si encore connectyé à la vm dans le terminal, taper <br>
+            Si encore connecté à la vm dans le terminal, taper <br>
             <code class="code">exit</code><br>
             puis <code class="code">vagrant halt</code>
         </p>
@@ -288,6 +363,21 @@
             </li>
             <li>
                 <code class="code">vagrant ssh</code> nous connecte à la VM
+            </li>
+            <li>
+                <code class="code">sass --watch --poll style.scss:style.css</code> compile le fichier scss en css
+            </li>
+            <li>
+                <code class="code">git status</code> permet de s'assurer que tous les fichiers désirés sont liés au dépot GitHub
+            </li>
+            <li>
+                <code class="code">git add nom_du_fichier</code> ou <code class="code">git add *</code> lie de nouveaux fichiers à git
+            </li>
+            <li>
+                <code class="code">git commit -m "le_nom_du_commit</code> enregistre l'état d'avancement du projet
+            </li>
+            <li>
+                <code class="code">git push origin master</code> envoie le ou les commits sur GitHub.com
             </li>
             <li>
                 <code class="code">exit</code> déconnecte de la VM
